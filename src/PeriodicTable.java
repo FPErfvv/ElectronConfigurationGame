@@ -214,6 +214,10 @@ public class PeriodicTable extends JPanel implements ActionListener {
         }
     }
 
+    public void setButtonColor(int index, Color color) {
+        elements.get(index).setBackground(color);
+    }
+
     public int getAnswerIndex() {
         return answerIndex;
     }
