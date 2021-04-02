@@ -1,14 +1,8 @@
-import java.awt.Dimension;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.*;
 
-
-public class Main extends JFrame implements ActionListener{
+public class GameBoard extends JPanel{
     String[] config = {
         "1s1","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","1s2",
         "[He] 2s1","[He] 2s2","null","null","null","null","null","null","null","null","null","null","[He] 2s2 2p1",
@@ -43,45 +37,28 @@ public class Main extends JFrame implements ActionListener{
         "[Rn] 7s2 5f11","[Rn] 7s2 5f12","[Rn] 7s2 5f13","[Rn] 7s2 5f14",
         "[Rn] 7s2 5f14 7p1","null"
     };
-    CardLayout layout;
-    JButton next;
-    JButton back;
-    Container c;
-    public Main() {
-        super("Electron Configuration Game");
-        c = getContentPane();
-        layout = new CardLayout();
-        c.setLayout(layout);
-        setSize(1000, 720);
-        GameBoard gameBoard = new GameBoard();
-
-        next = gameBoard.getProgressButtons()[0];
-        back = gameBoard.getProgressButtons()[1];
-        next.addActionListener(this);
-        back.addActionListener(this);
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.BLUE);
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(Color.MAGENTA);
-        c.add(gameBoard);
-        c.add(panel);
-        c.add(panel2);
+    FlowLayout flow;
+    JButton[] progressButtons;
+    public GameBoard() {
+        PeriodicTable table = new PeriodicTable(config);
+        Score leftScore = new Score(true);
+        Score rightScore = new Score(false);
+        CenterPanel centerPanel = new CenterPanel(config, table, leftScore, rightScore);
+        progressButtons = centerPanel.getProgressButtons();
+        flow = new FlowLayout(FlowLayout.CENTER);
+        setLayout(flow);
+        add(leftScore);
+        add(centerPanel);
+        add(rightScore);
+        add(table);
+        setBackground(Color.RED);
         setVisible(true);
-    }
-    
-    public static void main(String[] args) throws Exception {
-        Main eConfigGame = new Main();
+        
     }
 
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        JButton source = (JButton) arg0.getSource();
-        System.out.println("It Works");
-        if (source.equals(next)) {
-            layout.next(c);
-        } else {
-            layout.previous(c);
-        }
-
+    public JButton[] getProgressButtons() {
+        return progressButtons;
     }
+
+
 }

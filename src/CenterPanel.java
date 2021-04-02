@@ -27,11 +27,15 @@ public class CenterPanel extends JPanel implements ActionListener {
     int targetIndex;
     int colorIndex;
     int colorIndexCount;
+    Score leftScore;
+    Score rightScore;
 
-    public CenterPanel(String[] config, PeriodicTable table) {
+    public CenterPanel(String[] config, PeriodicTable table, Score leftScore, Score rightScore) {
         this.setPreferredSize(new Dimension(350,255));
         this.config = config;
         this.table = table;
+        this.leftScore = leftScore;
+        this.rightScore = rightScore;
         startStop = new JButton("Start/Stop");
         next = new JButton("Next");
         back = new JButton("Back");
@@ -78,11 +82,16 @@ public class CenterPanel extends JPanel implements ActionListener {
             table.setButtonColor(colorIndex, Color.GREEN);
             colorIndexCount = 0;
             targetIndex = getTargetConfig();
-        } else { //TODO: check if there has been change since the last button press
-            //TODO: or use answerIndex as class variable to 
-            colorIndex = answerIndex;
-            table.setButtonColor(colorIndex, Color.RED);
-            colorIndexCount = 0;
+            leftScore.addPoint(); //TODO: add bonus for higher energy level
+            rightScore.addPoint();
+        } else {
+            if (answerIndex != -1){
+                colorIndex = answerIndex;
+                answerIndex = -1;
+                table.setButtonColor(colorIndex, Color.RED);
+                colorIndexCount = 0;
+            }
+
         }
     }
 
@@ -91,7 +100,7 @@ public class CenterPanel extends JPanel implements ActionListener {
         boolean looping = true;
         while (looping) {
             configIndex = getRandomNumberUsingNextInt(0, config.length-1);
-            if (!config[configIndex].equals("null")) {
+            if (!config[configIndex].equals("null") && !config[configIndex].equals("anomaly")) {
                 looping = false;
                 System.out.println(config[configIndex]);
                 return configIndex;
@@ -107,6 +116,8 @@ public class CenterPanel extends JPanel implements ActionListener {
             if (source.getText().equals("Start/Stop")) {
                 if (playing) {
                     targetConfigLabel.setText("       Click the start button to start the game!");
+                    leftScore.resetScore();
+                    rightScore.resetScore();
                     playing = false;
                 } else {
                     playing = true;
@@ -120,7 +131,7 @@ public class CenterPanel extends JPanel implements ActionListener {
             }
             if (colorIndexCount >=0 ) {
                 colorIndexCount++;
-                if (colorIndexCount > 5) {
+                if (colorIndexCount > 3) { //length of the red/green flash
                     table.setButtonColor(colorIndex, new JButton().getBackground());
                     colorIndexCount = -1;
                 }            
@@ -132,5 +143,9 @@ public class CenterPanel extends JPanel implements ActionListener {
 
     public boolean isPlaying() {
         return playing;
+    }
+
+    public JButton[] getProgressButtons() {
+        return new JButton[] {next, back};
     }
 }

@@ -15,7 +15,8 @@ import java.util.Scanner;
 
 import javax.swing.Timer;
 
-public class Score extends JPanel implements ActionListener {
+public class Score extends JPanel {
+    ImageIcon s0;
     ImageIcon s1;
     ImageIcon s2;
     ImageIcon px2;
@@ -45,21 +46,20 @@ public class Score extends JPanel implements ActionListener {
     ImageIcon s;
     ImageIcon cl;
     ImageIcon ar;
+    ImageIcon blank;
     JLabel orbitals;
     JLabel text;
     BoxLayout layout;
     ArrayList<ImageIcon> schrodinger;
     ArrayList<ImageIcon> bohr;
     boolean left;
-    Timer timer;
-    int temp;
+    int score;
 
     public Score(boolean left) {
         this.left = left;
         setVisible(true);
-        temp = 1;
-        timer = new Timer(1000, this);
-        text = new JLabel("                          Score: 5     ");
+        score = 0;
+        text = new JLabel("                          Score: 0     ");
         layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
         setLayout(layout);
         add(text);
@@ -67,11 +67,11 @@ public class Score extends JPanel implements ActionListener {
             leftScore();
         else
             rightScore();
-        timer.start();
 
     }
 
     public void leftScore() {
+        s0 = new ImageIcon("src/images/schrodinger/0S.png");
         s1 = new ImageIcon("src/images/schrodinger/1S.png");
         s2 = new ImageIcon("src/images/schrodinger/2S.png");
         px2 = new ImageIcon("src/images/schrodinger/2Px.png");
@@ -81,15 +81,15 @@ public class Score extends JPanel implements ActionListener {
         px3 = new ImageIcon("src/images/schrodinger/3Px.png");
         py3 = new ImageIcon("src/images/schrodinger/3Py.png");
         pz3 = new ImageIcon("src/images/schrodinger/3Pz.png");
-        schrodinger = new ArrayList<ImageIcon>(Arrays.asList(s1, s2, px2, py2, pz2, s3, px3, py3, pz3));
-        display = scaleImage(pz3, 225, 225);
+        schrodinger = new ArrayList<ImageIcon>(Arrays.asList(s0,s1, s2, px2, py2, pz2, s3, px3, py3, pz3));
+        display = scaleImage(s0, 225, 225);
         orbitals = new JLabel();
         orbitals.setIcon(display);
         add(orbitals);
-        setImages(3);
     }
 
     public void rightScore() {
+        blank = new ImageIcon("src/images/bohr/Blank.png");
         h = new ImageIcon("src/images/bohr/H.png");
         he = new ImageIcon("src/images/bohr/He.png");
         li = new ImageIcon("src/images/bohr/Li.png");
@@ -108,37 +108,39 @@ public class Score extends JPanel implements ActionListener {
         s = new ImageIcon("src/images/bohr/S.png");
         cl = new ImageIcon("src/images/bohr/Cl.png");
         ar = new ImageIcon("src/images/bohr/Ar.png");
-        bohr = new ArrayList<ImageIcon>(Arrays.asList(h, he, li, be, b, c, n, o, f, ne, na, mg, al, si, p, s, cl, ar));
-        display = scaleImage(ar, 225, 225);
+        bohr = new ArrayList<ImageIcon>(Arrays.asList(blank, h, he, li, be, b, c, n, o, f, ne, na, mg, al, si, p, s, cl, ar));
+        display = scaleImage(blank, 225, 225);
         orbitals = new JLabel();
         orbitals.setIcon(display);
         add(orbitals);
 
     }
 
-    public void setImages(int numElectrons) {
+    public void setImages() {
         if (!left) {
-            display = scaleImage(bohr.get(numElectrons-1), 225, 225);
+            display = scaleImage(bohr.get(score), 225, 225);
             orbitals.setIcon(display);
             revalidate();
             repaint();
         }
         else {
-            if (numElectrons >= 15 )
+            if (score >= 15 )
+                display = scaleImage(schrodinger.get(9), 225, 225);
+            else if (score >= 14)
                 display = scaleImage(schrodinger.get(8), 225, 225);
-            else if (numElectrons >= 14)
+            else if (score >= 13)
                 display = scaleImage(schrodinger.get(7), 225, 225);
-            else if (numElectrons >= 13)
+            else if (score >= 11)
                 display = scaleImage(schrodinger.get(6), 225, 225);
-            else if (numElectrons >= 11)
+            else if (score >= 7)
                 display = scaleImage(schrodinger.get(5), 225, 225);
-            else if (numElectrons >= 7)
+            else if (score >= 6)
                 display = scaleImage(schrodinger.get(4), 225, 225);
-            else if (numElectrons >= 6)
+            else if (score >= 5)
                 display = scaleImage(schrodinger.get(3), 225, 225);
-            else if (numElectrons >= 5)
+            else if (score >= 3)
                 display = scaleImage(schrodinger.get(2), 225, 225);
-            else if (numElectrons >= 3)
+            else if (score >=1)
                 display = scaleImage(schrodinger.get(1), 225, 225);
             else 
                 display = scaleImage(schrodinger.get(0), 225, 225);
@@ -147,7 +149,7 @@ public class Score extends JPanel implements ActionListener {
             revalidate();
             repaint();
         }
-        text.setText("                          Score: "+temp);
+        text.setText("                          Score: "+score);
     }
     public void writeToFile(int score) {
         try {
@@ -160,7 +162,6 @@ public class Score extends JPanel implements ActionListener {
           }
     }
     public int readFile() {
-        int score = 0;
         try {
             String test = "2\u2076";
             //System.out.println(test);
@@ -178,6 +179,14 @@ public class Score extends JPanel implements ActionListener {
             e.printStackTrace();
         }
         return score;
+    }
+    public void addPoint() {
+        score++;
+        setImages();
+    }
+    public void resetScore() {
+        score = 0;
+        text.setText("                          Score: "+score);
     }
 
     public ImageIcon scaleImage(ImageIcon icon, int w, int h) {
@@ -197,14 +206,5 @@ public class Score extends JPanel implements ActionListener {
         return new ImageIcon(icon.getImage().getScaledInstance(nw, nh, Image.SCALE_DEFAULT));
     }
 
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        if (temp > 18)
-            temp = 1; 
-        setImages(temp);
-        temp++;
-
-
-    }
 
 }

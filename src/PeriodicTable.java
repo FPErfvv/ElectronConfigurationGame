@@ -196,8 +196,10 @@ public class PeriodicTable extends JPanel implements ActionListener {
                 elements.get(i).setBackground(Color.black);
         anomalies = new ArrayList<JButton>(Arrays.asList(Cr, Cu, Nb, Mo, Ru,Rh,Pd,Ag,La,Ce,Gd,Pt,Au,Ac,Th,Pa,U,Np,Cm));
             
-        answerIndex = 0;
+        answerIndex = -1;
         add(buttons);
+        setBackground(Color.BLACK);
+        buttons.setBackground(Color.black);
         setVisible(true);
 
     }
@@ -219,7 +221,9 @@ public class PeriodicTable extends JPanel implements ActionListener {
     }
 
     public int getAnswerIndex() {
-        return answerIndex;
+        int answer = answerIndex;
+        answerIndex = -1; //returns -1 if the answer has not changed but if it has it returns that index.
+        return answer;
     }
 
     public static void addElements() {
