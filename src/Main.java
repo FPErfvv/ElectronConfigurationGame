@@ -45,6 +45,7 @@ public class Main extends JFrame implements ActionListener{
     };
     CardLayout layout;
     JButton back;
+    JButton play;
     Container c;
     public Main() {
         super("Electron Configuration Game");
@@ -53,16 +54,14 @@ public class Main extends JFrame implements ActionListener{
         c.setLayout(layout);
         setSize(1000, 720);
         GameBoard gameBoard = new GameBoard();
-
+        Instructions instructions = new Instructions();
+        play = instructions.getPlay();
         back = gameBoard.getProgressButtons();
         back.addActionListener(this);
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.BLUE);
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(Color.MAGENTA);
+        play.addActionListener(this);
+        c.add(instructions);
         c.add(gameBoard);
-        c.add(panel);
-        c.add(panel2);
+        
         setVisible(true);
         this.setResizable(false);
     }
@@ -77,6 +76,8 @@ public class Main extends JFrame implements ActionListener{
         System.out.println("It Works");
         if (source.equals(back)) {
             layout.previous(c);
+        } else {
+            layout.next(c);
         }
 
     }

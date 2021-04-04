@@ -187,6 +187,7 @@ public class Score extends JPanel {
     public void resetScore() {
         score = 0;
         text.setText("                          Score: "+score);
+        setImages();
     }
 
     public ImageIcon scaleImage(ImageIcon icon, int w, int h) {

@@ -4,6 +4,7 @@ import javax.swing.Timer;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +14,7 @@ import java.time.Period;
 import java.awt.Font;
 
 public class CenterPanel extends JPanel implements ActionListener {
+    JLabel targetConfigLabelQuestion;
     JLabel targetConfigLabel;
     String targetConfig;
     JButton startStop;
@@ -28,6 +30,7 @@ public class CenterPanel extends JPanel implements ActionListener {
     int colorIndexCount;
     Score leftScore;
     Score rightScore;
+    TimerPanel timerPanel;
 
     public CenterPanel(String[] config, PeriodicTable table, Score leftScore, Score rightScore) {
         this.setPreferredSize(new Dimension(350,255));
@@ -37,7 +40,9 @@ public class CenterPanel extends JPanel implements ActionListener {
         this.rightScore = rightScore;
         startStop = new JButton("Start/Stop");
         back = new JButton("Back");
-        targetConfigLabel = new JLabel("     Click the start button to start the game!");
+        targetConfigLabelQuestion = new JLabel("Click the start button to start the game!",SwingConstants.CENTER);
+        targetConfigLabel = new JLabel("",SwingConstants.CENTER);
+        timerPanel = new TimerPanel();
         playing = false;
         checking = false;
         hasAnswered = false;
@@ -49,19 +54,23 @@ public class CenterPanel extends JPanel implements ActionListener {
         back.addActionListener(this);
         startStop.addActionListener(this);
         back.setPreferredSize(new Dimension(100,27));
-        targetConfigLabel.setPreferredSize(new Dimension(350,30));
+        targetConfigLabelQuestion.setPreferredSize(new Dimension(350,30));
+        targetConfigLabel.setPreferredSize(new Dimension(350,40));
 
 
-        Font labelFont = targetConfigLabel.getFont();
+        Font labelFont = targetConfigLabelQuestion.getFont();
 
-        // Set the targetConfigLabel's font size to the newly determined size.
-        targetConfigLabel.setFont(new Font(labelFont.getName(), Font.PLAIN, 16));
+        // Set the targetConfigLabelQuestion's font size to the newly determined size.
+        targetConfigLabelQuestion.setFont(new Font(labelFont.getName(), Font.PLAIN, 16));
+        targetConfigLabel.setFont(new Font(labelFont.getName(), Font.PLAIN, 24));
 
 
         this.setBackground(Color.GREEN);
+        add(targetConfigLabelQuestion);
         add(targetConfigLabel);
         add(startStop);
         add(back);
+        add(timerPanel);
         setVisible(true);
     }
 
@@ -71,7 +80,9 @@ public class CenterPanel extends JPanel implements ActionListener {
     }
 
     public void playGame() {
-        targetConfigLabel.setText("     What element is: " + config[targetIndex]);
+        //targetConfigLabelQuestion.setText("     What element is: \n" + config[targetIndex]);
+        targetConfigLabelQuestion.setText("What element is:");
+        targetConfigLabel.setText(config[targetIndex]);
         int answerIndex = table.getAnswerIndex();
         if (answerIndex == targetIndex) {
             System.out.println("Correct!");
@@ -112,12 +123,16 @@ public class CenterPanel extends JPanel implements ActionListener {
             JButton source = (JButton) arg0.getSource();
             if (source.getText().equals("Start/Stop")) {
                 if (playing) {
-                    targetConfigLabel.setText("       Click the start button to start the game!");
+                    targetConfigLabelQuestion.setText("       Click the start button to start the game!");
+                    targetConfigLabel.setText("");
+                    playing = false;
+                    timerPanel.stopTimer();
+                } else {
                     leftScore.resetScore();
                     rightScore.resetScore();
-                    playing = false;
-                } else {
                     playing = true;
+                    timerPanel.startTimer();
+
                 }
             }
         }
