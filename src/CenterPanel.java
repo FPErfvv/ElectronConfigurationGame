@@ -16,7 +16,6 @@ public class CenterPanel extends JPanel implements ActionListener {
     JLabel targetConfigLabel;
     String targetConfig;
     JButton startStop;
-    JButton next;
     JButton back;
     boolean playing;
     String[] config;
@@ -37,7 +36,6 @@ public class CenterPanel extends JPanel implements ActionListener {
         this.leftScore = leftScore;
         this.rightScore = rightScore;
         startStop = new JButton("Start/Stop");
-        next = new JButton("Next");
         back = new JButton("Back");
         targetConfigLabel = new JLabel("     Click the start button to start the game!");
         playing = false;
@@ -48,9 +46,9 @@ public class CenterPanel extends JPanel implements ActionListener {
         targetIndex = getTargetConfig();
         timer = new Timer(100, this);
         timer.start();
-        next.addActionListener(this);
         back.addActionListener(this);
         startStop.addActionListener(this);
+        back.setPreferredSize(new Dimension(100,27));
         targetConfigLabel.setPreferredSize(new Dimension(350,30));
 
 
@@ -63,7 +61,6 @@ public class CenterPanel extends JPanel implements ActionListener {
         this.setBackground(Color.GREEN);
         add(targetConfigLabel);
         add(startStop);
-        add(next);
         add(back);
         setVisible(true);
     }
@@ -145,7 +142,7 @@ public class CenterPanel extends JPanel implements ActionListener {
         return playing;
     }
 
-    public JButton[] getProgressButtons() {
-        return new JButton[] {next, back};
+    public JButton getProgressButtons() {
+        return back;
     }
 }

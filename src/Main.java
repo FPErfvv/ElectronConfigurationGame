@@ -44,7 +44,6 @@ public class Main extends JFrame implements ActionListener{
         "[Rn] 7s2 5f14 7p1","null"
     };
     CardLayout layout;
-    JButton next;
     JButton back;
     Container c;
     public Main() {
@@ -55,9 +54,7 @@ public class Main extends JFrame implements ActionListener{
         setSize(1000, 720);
         GameBoard gameBoard = new GameBoard();
 
-        next = gameBoard.getProgressButtons()[0];
-        back = gameBoard.getProgressButtons()[1];
-        next.addActionListener(this);
+        back = gameBoard.getProgressButtons();
         back.addActionListener(this);
         JPanel panel = new JPanel();
         panel.setBackground(Color.BLUE);
@@ -67,6 +64,7 @@ public class Main extends JFrame implements ActionListener{
         c.add(panel);
         c.add(panel2);
         setVisible(true);
+        this.setResizable(false);
     }
     
     public static void main(String[] args) throws Exception {
@@ -77,9 +75,7 @@ public class Main extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
         JButton source = (JButton) arg0.getSource();
         System.out.println("It Works");
-        if (source.equals(next)) {
-            layout.next(c);
-        } else {
+        if (source.equals(back)) {
             layout.previous(c);
         }
 

@@ -38,14 +38,15 @@ public class GameBoard extends JPanel{
         "[Rn] 7s2 5f14 7p1","null"
     };
     FlowLayout flow;
-    JButton[] progressButtons;
+    JButton back;
     public GameBoard() {
         PeriodicTable table = new PeriodicTable(config);
         Score leftScore = new Score(true);
         Score rightScore = new Score(false);
         CenterPanel centerPanel = new CenterPanel(config, table, leftScore, rightScore);
-        progressButtons = centerPanel.getProgressButtons();
+        back = centerPanel.getProgressButtons();
         flow = new FlowLayout(FlowLayout.CENTER);
+        flow.setHgap(30);
         setLayout(flow);
         add(leftScore);
         add(centerPanel);
@@ -56,8 +57,8 @@ public class GameBoard extends JPanel{
         
     }
 
-    public JButton[] getProgressButtons() {
-        return progressButtons;
+    public JButton getProgressButtons() {
+        return back;
     }
 
 
