@@ -295,6 +295,10 @@ public class Score extends JPanel {
         return highScore;
     }
 
+    public void resetHighScore() {
+        writeToFile(true);
+    }
+
     public boolean filesCreated() {
         return filesCreated;
     }

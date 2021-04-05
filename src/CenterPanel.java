@@ -20,6 +20,7 @@ public class CenterPanel extends JPanel implements ActionListener {
     String targetConfig;
     JButton startStop;
     JButton back;
+    JButton resetHighScore;
     boolean playing;
     String[] config;
     PeriodicTable table;
@@ -42,7 +43,8 @@ public class CenterPanel extends JPanel implements ActionListener {
         this.rightScore = rightScore;
         startStop = new JButton("Start/Stop");
         back = new JButton("Back");
-        if (leftScore.filesCreated) {
+        resetHighScore = new JButton("Reset High Score");
+        if (leftScore.filesCreated()) {
             highScore = leftScore.getHighScore();
             targetConfigLabel = new JLabel("High Score: "+ highScore,SwingConstants.CENTER);
         } else {
@@ -62,6 +64,7 @@ public class CenterPanel extends JPanel implements ActionListener {
         timer.start();
         back.addActionListener(this);
         startStop.addActionListener(this);
+        resetHighScore.addActionListener(this);
         back.setPreferredSize(new Dimension(100,27));
         targetConfigLabelQuestion.setPreferredSize(new Dimension(350,30));
         targetConfigLabel.setPreferredSize(new Dimension(350,40));
@@ -80,6 +83,7 @@ public class CenterPanel extends JPanel implements ActionListener {
         add(startStop);
         add(back);
         add(timerPanel);
+        add(resetHighScore);
         setVisible(true);
     }
 
@@ -152,6 +156,13 @@ public class CenterPanel extends JPanel implements ActionListener {
                     playing = true;
                     timerPanel.startTimer();
 
+                }
+            }
+            if (source.getText().equals("Reset High Score")) {
+                leftScore.resetHighScore();
+                highScore = 0;
+                if (leftScore.filesCreated && !playing) {
+                    targetConfigLabel.setText("High Score: " + highScore);
                 }
             }
         }

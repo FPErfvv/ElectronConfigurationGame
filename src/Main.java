@@ -56,7 +56,7 @@ public class Main extends JFrame implements ActionListener{
         c.setLayout(layout);
         setSize(1000, 720);
         GameBoard gameBoard = new GameBoard();
-        Instructions instructions = new Instructions();
+        BackgroundPanel instructions = new BackgroundPanel();
         play = instructions.getPlay();
         back = gameBoard.getProgressButtons();
         back.addActionListener(this);
