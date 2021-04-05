@@ -209,11 +209,9 @@ public class PeriodicTable extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evt) {
         JButton source = (JButton) evt.getSource();
-        if (!anomalies.contains(source)) {
-            int i = elements.indexOf(source);
-            System.out.println(source.getText() + "(" +i+ "): " + configs[i]);
-            answerIndex = i;
-        }
+        int i = elements.indexOf(source);
+        System.out.println(source.getText() + "(" +i+ "): " + configs[i]);
+        answerIndex = i;
     }
 
     public void setButtonColor(int index, Color color) {
