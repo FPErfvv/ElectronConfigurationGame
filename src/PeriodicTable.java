@@ -211,7 +211,7 @@ public class PeriodicTable extends JPanel implements ActionListener {
         JButton source = (JButton) evt.getSource();
         if (!anomalies.contains(source)) {
             int i = elements.indexOf(source);
-            System.out.println(source.getText() + ": " + configs[i]);
+            System.out.println(source.getText() + "(" +i+ "): " + configs[i]);
             answerIndex = i;
         }
     }

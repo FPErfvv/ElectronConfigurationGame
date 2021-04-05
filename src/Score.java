@@ -46,6 +46,27 @@ public class Score extends JPanel {
     ImageIcon s;
     ImageIcon cl;
     ImageIcon ar;
+
+    ImageIcon k;
+    ImageIcon ca;
+    ImageIcon sc;
+    ImageIcon ti;
+    ImageIcon v;
+    ImageIcon cr;
+    ImageIcon mn;
+    ImageIcon fe;
+    ImageIcon co;
+    ImageIcon ni;
+    ImageIcon cu;
+    ImageIcon zn;
+    ImageIcon ga;
+    ImageIcon ge;
+    ImageIcon as;
+    ImageIcon se;
+    ImageIcon br;
+    ImageIcon kr;
+
+
     ImageIcon blank;
     JLabel orbitals;
     JLabel text;
@@ -53,34 +74,46 @@ public class Score extends JPanel {
     ArrayList<ImageIcon> schrodinger;
     ArrayList<ImageIcon> bohr;
     boolean left;
+    boolean filesCreated;
     int score;
+    int highScore;
+    String scBasePath;
+    String boBasePath;
+    String userConfigDir;
 
     public Score(boolean left) {
         this.left = left;
         setVisible(true);
         score = 0;
+        scBasePath = "app/images/schrodinger/";
+        boBasePath = "app/images/bohr/";
         text = new JLabel("                          Score: 0     ");
         layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
         setLayout(layout);
         add(text);
-        if (left)
+        filesCreated = false;
+        userConfigDir = System.getenv("APPDATA");
+        if (left) {
+            createFile();
             leftScore();
-        else
+        }
+        else {
             rightScore();
-
+        }
+        readFile();
     }
 
     public void leftScore() {
-        s0 = new ImageIcon("src/images/schrodinger/0S.png");
-        s1 = new ImageIcon("src/images/schrodinger/1S.png");
-        s2 = new ImageIcon("src/images/schrodinger/2S.png");
-        px2 = new ImageIcon("src/images/schrodinger/2Px.png");
-        py2 = new ImageIcon("src/images/schrodinger/2Py.png");
-        pz2 = new ImageIcon("src/images/schrodinger/2Pz.png");
-        s3 = new ImageIcon("src/images/schrodinger/3S.png");
-        px3 = new ImageIcon("src/images/schrodinger/3Px.png");
-        py3 = new ImageIcon("src/images/schrodinger/3Py.png");
-        pz3 = new ImageIcon("src/images/schrodinger/3Pz.png");
+        s0 = new ImageIcon(scBasePath+"0S.png");
+        s1 = new ImageIcon(scBasePath+"1S.png");
+        s2 = new ImageIcon(scBasePath+"2S.png");
+        px2 = new ImageIcon(scBasePath+"2Px.png");
+        py2 = new ImageIcon(scBasePath+"2Py.png");
+        pz2 = new ImageIcon(scBasePath+"2Pz.png");
+        s3 = new ImageIcon(scBasePath+"3S.png");
+        px3 = new ImageIcon(scBasePath+"3Px.png");
+        py3 = new ImageIcon(scBasePath+"3Py.png");
+        pz3 = new ImageIcon(scBasePath+"3Pz.png");
         schrodinger = new ArrayList<ImageIcon>(Arrays.asList(s0,s1, s2, px2, py2, pz2, s3, px3, py3, pz3));
         display = scaleImage(s0, 225, 225);
         orbitals = new JLabel();
@@ -89,26 +122,45 @@ public class Score extends JPanel {
     }
 
     public void rightScore() {
-        blank = new ImageIcon("src/images/bohr/Blank.png");
-        h = new ImageIcon("src/images/bohr/H.png");
-        he = new ImageIcon("src/images/bohr/He.png");
-        li = new ImageIcon("src/images/bohr/Li.png");
-        be = new ImageIcon("src/images/bohr/Be.png");
-        b = new ImageIcon("src/images/bohr/B.png");
-        c = new ImageIcon("src/images/bohr/C.png");
-        n = new ImageIcon("src/images/bohr/N.png");
-        o = new ImageIcon("src/images/bohr/O.png");
-        f = new ImageIcon("src/images/bohr/F.png");
-        ne = new ImageIcon("src/images/bohr/Ne.png");
-        na = new ImageIcon("src/images/bohr/Na.png");
-        mg = new ImageIcon("src/images/bohr/Mg.png");
-        al = new ImageIcon("src/images/bohr/Al.png");
-        si = new ImageIcon("src/images/bohr/Si.png");
-        p = new ImageIcon("src/images/bohr/P.png");
-        s = new ImageIcon("src/images/bohr/S.png");
-        cl = new ImageIcon("src/images/bohr/Cl.png");
-        ar = new ImageIcon("src/images/bohr/Ar.png");
-        bohr = new ArrayList<ImageIcon>(Arrays.asList(blank, h, he, li, be, b, c, n, o, f, ne, na, mg, al, si, p, s, cl, ar));
+        blank = new ImageIcon(boBasePath+"Blank.png");
+        h = new ImageIcon(boBasePath+"H.png");
+        he = new ImageIcon(boBasePath+"He.png");
+        li = new ImageIcon(boBasePath+"Li.png");
+        be = new ImageIcon(boBasePath+"Be.png");
+        b = new ImageIcon(boBasePath+"B.png");
+        c = new ImageIcon(boBasePath+"C.png");
+        n = new ImageIcon(boBasePath+"N.png");
+        o = new ImageIcon(boBasePath+"O.png");
+        f = new ImageIcon(boBasePath+"F.png");
+        ne = new ImageIcon(boBasePath+"Ne.png");
+        na = new ImageIcon(boBasePath+"Na.png");
+        mg = new ImageIcon(boBasePath+"Mg.png");
+        al = new ImageIcon(boBasePath+"Al.png");
+        si = new ImageIcon(boBasePath+"Si.png");
+        p = new ImageIcon(boBasePath+"P.png");
+        s = new ImageIcon(boBasePath+"S.png");
+        cl = new ImageIcon(boBasePath+"Cl.png");
+        ar = new ImageIcon(boBasePath+"Ar.png");
+        k = new ImageIcon(boBasePath+"K.png");
+        ca = new ImageIcon(boBasePath+"Ca.png");
+        sc = new ImageIcon(boBasePath+"Sc.png");
+        ti = new ImageIcon(boBasePath+"Ti.png");
+        v = new ImageIcon(boBasePath+"C.png");
+        cr = new ImageIcon(boBasePath+"Cr.png");
+        mn = new ImageIcon(boBasePath+"Mn.png");
+        fe = new ImageIcon(boBasePath+"Fe.png");
+        co = new ImageIcon(boBasePath+"Co.png");
+        ni = new ImageIcon(boBasePath+"Ni.png");
+        cu = new ImageIcon(boBasePath+"Cu.png");
+        zn = new ImageIcon(boBasePath+"Zn.png");
+        ga = new ImageIcon(boBasePath+"Ga.png");
+        ge = new ImageIcon(boBasePath+"Ge.png");
+        as = new ImageIcon(boBasePath+"As.png");
+        se = new ImageIcon(boBasePath+"Se.png");
+        br = new ImageIcon(boBasePath+"Br.png");
+        kr = new ImageIcon(boBasePath+"Kr.png");
+        bohr = new ArrayList<ImageIcon>(Arrays.asList(blank, h, he, li, be, b, c, n, o, f, ne, na, mg, al, si, p, s, cl, ar,
+                                                        k, ca, sc, ti, v, cr, mn, fe, co, ni, cu, zn, ga, ge, as, se, br, kr));
         display = scaleImage(blank, 225, 225);
         orbitals = new JLabel();
         orbitals.setIcon(display);
@@ -151,43 +203,100 @@ public class Score extends JPanel {
         }
         text.setText("                          Score: "+score);
     }
-    public void writeToFile(int score) {
+    public void writeToFile(boolean firstWrite) {
         try {
-            FileWriter myWriter = new FileWriter("src/tools/highScore.txt");
-            myWriter.write("Files in Java might be tricky");
+            FileWriter myWriter = new FileWriter(userConfigDir + "/electronConfigGameFiles/highScore.txt");
+            if (!firstWrite) {
+                myWriter.write(highScore+"");
+
+            } else {
+                myWriter.write("0");
+            }
             myWriter.close();
+            System.out.println("File has been written to!");
           } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
           }
     }
-    public int readFile() {
+
+    public void createFile() {
+        userConfigDir = System.getenv("APPDATA");
+        // creates a file object in the current path
+        File directory = new File(userConfigDir + "/electronConfigGameFiles");
+
+        // tries to create a new directory
+        boolean value = directory.mkdirs();
+        if(value) {
+            System.out.println("The new directory is created.");
+            filesCreated = true;
+        }
+        else {
+            System.out.println("The directory already exists.");
+            filesCreated = true;
+        }
+
         try {
-            String test = "2\u2076";
-            //System.out.println(test);
-            //System.out.println("2" + '\u2076');
-            //https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts
-            File myObj = new File("src/tools/filename.txt");
+            File myObj = new File(userConfigDir + "/electronConfigGameFiles/highScore.txt");
+            if (myObj.createNewFile()) {
+              System.out.println("File created: " + myObj.getName());
+              filesCreated = true;
+              writeToFile(true);
+            } else {
+              System.out.println("File already exists.");
+              filesCreated = true;
+              readFile();
+            }
+          } catch (IOException e) {
+                System.out.println("An error occurred.");
+                filesCreated = false;
+                e.printStackTrace();
+        }
+    }
+    public void readFile() {
+        try {
+            File myObj = new File(userConfigDir + "/electronConfigGameFiles/highScore.txt");
             Scanner myReader = new Scanner(myObj);
             
-            
-            score = Integer.parseInt(myReader.nextLine());
+            highScore = Integer.parseInt(myReader.nextLine());
             myReader.close();
          
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        return score;
     }
-    public void addPoint() {
-        score++;
+
+    public void addPoint(int index) {
+        if (index > 89) {
+            score += 4;
+        } else if (index > 53) {
+            score += 3;
+        } else if (index > 17) {
+            score += 2;
+        } else {
+            score++;
+        }
         setImages();
+        if (score > highScore) {
+            highScore = score;
+        }
+        writeToFile(false);
     }
+
     public void resetScore() {
         score = 0;
         text.setText("                          Score: "+score);
         setImages();
+    }
+
+    public int getHighScore() {
+        readFile();
+        return highScore;
+    }
+
+    public boolean filesCreated() {
+        return filesCreated;
     }
 
     public ImageIcon scaleImage(ImageIcon icon, int w, int h) {

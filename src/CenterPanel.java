@@ -1,3 +1,4 @@
+
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -31,6 +32,7 @@ public class CenterPanel extends JPanel implements ActionListener {
     Score leftScore;
     Score rightScore;
     TimerPanel timerPanel;
+    int highScore;
 
     public CenterPanel(String[] config, PeriodicTable table, Score leftScore, Score rightScore) {
         this.setPreferredSize(new Dimension(350,255));
@@ -40,8 +42,15 @@ public class CenterPanel extends JPanel implements ActionListener {
         this.rightScore = rightScore;
         startStop = new JButton("Start/Stop");
         back = new JButton("Back");
+        if (leftScore.filesCreated) {
+            highScore = leftScore.getHighScore();
+            targetConfigLabel = new JLabel("High Score: "+ highScore,SwingConstants.CENTER);
+        } else {
+            targetConfigLabel = new JLabel("",SwingConstants.CENTER);
+        }
+        
         targetConfigLabelQuestion = new JLabel("Click the start button to start the game!",SwingConstants.CENTER);
-        targetConfigLabel = new JLabel("",SwingConstants.CENTER);
+        
         timerPanel = new TimerPanel();
         playing = false;
         checking = false;
@@ -80,7 +89,6 @@ public class CenterPanel extends JPanel implements ActionListener {
     }
 
     public void playGame() {
-        //targetConfigLabelQuestion.setText("     What element is: \n" + config[targetIndex]);
         targetConfigLabelQuestion.setText("What element is:");
         targetConfigLabel.setText(config[targetIndex]);
         int answerIndex = table.getAnswerIndex();
@@ -90,8 +98,8 @@ public class CenterPanel extends JPanel implements ActionListener {
             table.setButtonColor(colorIndex, Color.GREEN);
             colorIndexCount = 0;
             targetIndex = getTargetConfig();
-            leftScore.addPoint(); //TODO: add bonus for higher energy level
-            rightScore.addPoint();
+            leftScore.addPoint(answerIndex); //TODO: add bonus for higher energy level
+            rightScore.addPoint(answerIndex);
         } else {
             if (answerIndex != -1){
                 colorIndex = answerIndex;
@@ -101,6 +109,17 @@ public class CenterPanel extends JPanel implements ActionListener {
             }
 
         }
+    }
+
+    public void stopGame() {
+        targetConfigLabelQuestion.setText("       Click the start button to start the game!");
+        if(leftScore.filesCreated()) {
+            highScore = leftScore.getHighScore();
+            targetConfigLabel.setText("High Score: " + highScore);
+        }
+        
+        playing = false;
+        timerPanel.stopTimer();
     }
 
     public int getTargetConfig() {
@@ -119,14 +138,14 @@ public class CenterPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
+        if (timerPanel.timerHasFinished()) {
+            stopGame();
+        }
         if (arg0.getSource() instanceof JButton) {
             JButton source = (JButton) arg0.getSource();
             if (source.getText().equals("Start/Stop")) {
                 if (playing) {
-                    targetConfigLabelQuestion.setText("       Click the start button to start the game!");
-                    targetConfigLabel.setText("");
-                    playing = false;
-                    timerPanel.stopTimer();
+                    stopGame();
                 } else {
                     leftScore.resetScore();
                     rightScore.resetScore();

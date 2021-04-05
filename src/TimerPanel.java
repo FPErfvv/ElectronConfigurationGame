@@ -31,6 +31,7 @@ public class TimerPanel extends JPanel implements ActionListener {
     public void startTimer() {
         //time = TOTAL_TIME;
         timer.start();
+        timerHasFinished = false;
     }
 
     public void stopTimer() {
@@ -40,7 +41,6 @@ public class TimerPanel extends JPanel implements ActionListener {
 
     public boolean timerHasFinished() {
         return timerHasFinished;
-        
     }
     @Override
     public void actionPerformed(ActionEvent arg0) {
@@ -50,8 +50,7 @@ public class TimerPanel extends JPanel implements ActionListener {
         }
         label.setText(time + " sec");
         time--;
-        
-        System.out.println(time);
+    
 
     }
     

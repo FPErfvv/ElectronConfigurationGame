@@ -41,7 +41,7 @@ public class Main extends JFrame implements ActionListener{
         "anomaly","anomaly","anomaly","[Rn] 7s2 5f6",
         "[Rn] 7s2 5f7","anomaly","[Rn] 7s2 5f9","[Rn] 7s2 5f10",
         "[Rn] 7s2 5f11","[Rn] 7s2 5f12","[Rn] 7s2 5f13","[Rn] 7s2 5f14",
-        "[Rn] 7s2 5f14 7p1","null"
+        "anomaly","null"
     };
     CardLayout layout;
     JButton back;
@@ -49,6 +49,8 @@ public class Main extends JFrame implements ActionListener{
     Container c;
     public Main() {
         super("Electron Configuration Game");
+        String userConfigDir = System.getenv("APPDATA");
+        System.out.println(userConfigDir);
         c = getContentPane();
         layout = new CardLayout();
         c.setLayout(layout);
