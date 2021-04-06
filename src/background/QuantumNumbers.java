@@ -52,6 +52,7 @@ public class QuantumNumbers extends JPanel {
         add(magnetic);
         add(magneticEx);
         add(spin);
+        add(spinEx);
         setPreferredSize(size);
 
     }
@@ -59,14 +60,15 @@ public class QuantumNumbers extends JPanel {
     public void createLabels() { //<html>Hello World!<br/>blahblahblah</html>
         largeLabel = new Dimension(850, 50);
         principalEx = new JLabel("<html>   --The principal quantum number, n, designates the electron shell of an electron. This determines the the energy of the electron, and is equivalent to the number of the ring that the electron is on in the Bohr model. It can only be a non zero positive integer.</html>", SwingConstants.LEFT);
-        numbersEx = new JLabel("<html>   --In total, there are four quantum numbers. These numbers determine the velocity and location of an electron around an element.  There is the principal quantum number (n), the angular momentum quantum number (i), the magnetic quantum number (m\u2097), and the spin quantum number (m\u209B).</html>", SwingConstants.LEFT);
+        numbersEx = new JLabel("<html>   --In total, there are four quantum numbers. These numbers specify the properties of atomic orbitals and the properties of electrons in orbitals.  There is the principal quantum number (n), the angular momentum quantum number (i), the magnetic quantum number (m\u2097), and the spin quantum number (m\u209B).</html>", SwingConstants.LEFT);
         angularEx = new JLabel("<html>   --The angular momentum quantum number determines the shape of the orbitals. This number devides each shell into several different orbitals. The most common of these orbitals are the s, p, d, and f orbitals. This number can be any integer between 0 and n-1.</html>", SwingConstants.LEFT);
-        magneticEx = new JLabel("<html>   --The magnetic quantum number gives the orientation of the orbital around the nucleus. This uses a 3D axis.</html>", SwingConstants.LEFT);
-        spinEx = new JLabel("  --Principal Quantum Number (n)");
+        magneticEx = new JLabel("<html>   --The magnetic quantum number gives the orientation of the orbital around the nucleus. This uses a 3D coordinate system.</html>", SwingConstants.LEFT);
+        spinEx = new JLabel("<html>   --The spin quantum number gives the direction of the electrons internal spin, which creates a magnetic field. There are only two possible values for this. A m\u209B value of +1/2 means the electron has an upwards spin. A m\u209B value of -1/2 means the electron has a downwards spin.</html>", SwingConstants.LEFT);
         principalEx.setPreferredSize(largeLabel);
         numbersEx.setPreferredSize(largeLabel);
         angularEx.setPreferredSize(largeLabel);
         magneticEx.setPreferredSize(largeLabel);
+        spinEx.setPreferredSize(largeLabel);
     }
     
 }
