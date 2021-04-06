@@ -26,6 +26,16 @@ public class Score extends JPanel {
     ImageIcon px3;
     ImageIcon py3;
     ImageIcon pz3;
+
+    ImageIcon s4;
+    ImageIcon px4;
+    ImageIcon py4;
+    ImageIcon pz4;
+    ImageIcon Dx2y2;
+    ImageIcon Dxy;
+    ImageIcon Dyz;
+    ImageIcon Dxz;
+    ImageIcon Dz2;
     ImageIcon display;
 
     ImageIcon h;
@@ -87,7 +97,7 @@ public class Score extends JPanel {
         score = 0;
         scBasePath = "app/images/schrodinger/";
         boBasePath = "app/images/bohr/";
-        text = new JLabel("                          Score: 0     ");
+        text = new JLabel("                    Electrons (score): 0");
         layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
         setLayout(layout);
         add(text);
@@ -114,7 +124,19 @@ public class Score extends JPanel {
         px3 = new ImageIcon(scBasePath+"3Px.png");
         py3 = new ImageIcon(scBasePath+"3Py.png");
         pz3 = new ImageIcon(scBasePath+"3Pz.png");
-        schrodinger = new ArrayList<ImageIcon>(Arrays.asList(s0,s1, s2, px2, py2, pz2, s3, px3, py3, pz3));
+        s4 = new ImageIcon(scBasePath+"4S.png");
+        px4 = new ImageIcon(scBasePath+"4Px.png");
+        py4 = new ImageIcon(scBasePath+"4Py.png");
+        pz4 = new ImageIcon(scBasePath+"4Pz.png");
+        Dx2y2 = new ImageIcon(scBasePath+"3Dx2y2.png");
+        Dxy = new ImageIcon(scBasePath+"3Dxy.png");
+        Dxz = new ImageIcon(scBasePath+"3Dxz.png");
+        Dyz = new ImageIcon(scBasePath+"3Dyz.png");
+        Dz2 = new ImageIcon(scBasePath+"3Dz2.png");
+        schrodinger = new ArrayList<ImageIcon>(Arrays.asList(s0,s1, s2, px2, py2, pz2, s3, px3, py3, 
+                                                                pz3 , s4, Dxz, Dyz, Dxy, Dx2y2, Dz2, px4, py4, pz4));
+    
+
         display = scaleImage(s0, 225, 225);
         orbitals = new JLabel();
         orbitals.setIcon(display);
@@ -176,7 +198,25 @@ public class Score extends JPanel {
             repaint();
         }
         else {
-            if (score >= 15 )
+            if (score >= 33)
+                display = scaleImage(schrodinger.get(18), 225, 225);
+            else if (score >= 32)
+                display = scaleImage(schrodinger.get(17), 225, 225);
+            else if (score >= 31)
+                display = scaleImage(schrodinger.get(16), 225, 225);
+            else if (score >= 25)
+                display = scaleImage(schrodinger.get(15), 225, 225);
+            else if (score >= 24)
+                display = scaleImage(schrodinger.get(14), 225, 225);
+            else if (score >= 23)
+                display = scaleImage(schrodinger.get(13), 225, 225);
+            else if (score >= 22)
+                display = scaleImage(schrodinger.get(12), 225, 225);
+            else if (score >= 21)
+                display = scaleImage(schrodinger.get(11), 225, 225);
+            else if (score >= 19)
+                display = scaleImage(schrodinger.get(10), 225, 225);
+            else if (score >= 15 )
                 display = scaleImage(schrodinger.get(9), 225, 225);
             else if (score >= 14)
                 display = scaleImage(schrodinger.get(8), 225, 225);
@@ -201,7 +241,7 @@ public class Score extends JPanel {
             revalidate();
             repaint();
         }
-        text.setText("                          Score: "+score);
+        text.setText("                    Electrons (score): "+score);
     }
     public void writeToFile(boolean firstWrite) {
         try {
@@ -286,7 +326,7 @@ public class Score extends JPanel {
 
     public void resetScore() {
         score = 0;
-        text.setText("                          Score: "+score);
+        text.setText("                    Electrons (score): "+score);
         setImages();
     }
 
