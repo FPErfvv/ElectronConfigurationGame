@@ -10,7 +10,6 @@ import java.awt.*;
 public class BackgroundPanel extends JPanel {
     JButton play;
     JTabbedPane tabbedPane;
-    ElectronConfig electronConfig;
     Heisenberg heisenberg;
     Instructions instructions;
     PrinciplesAndRules pAr;
@@ -20,7 +19,6 @@ public class BackgroundPanel extends JPanel {
         tabbedPane = new JTabbedPane();
         play = new JButton("Play Game");
         tabSize = new Dimension(1000,613);
-        electronConfig = new ElectronConfig(tabSize);
         heisenberg = new Heisenberg(tabSize);
         instructions = new Instructions(tabSize);
         pAr = new PrinciplesAndRules(tabSize);
@@ -29,7 +27,6 @@ public class BackgroundPanel extends JPanel {
         tabbedPane.addTab("Quantum Numbers", quantumNumbers);
         tabbedPane.addTab("Heisenberg Uncertainty Principle", heisenberg);
         tabbedPane.addTab("Other Principles and Rules", pAr);
-        tabbedPane.addTab("Electron Configuration", electronConfig);
         tabbedPane.addTab("Instructions", instructions);
         tabbedPane.setBackground(Color.WHITE);
         add(tabbedPane, BorderLayout.CENTER);

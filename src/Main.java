@@ -75,7 +75,6 @@ public class Main extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
         JButton source = (JButton) arg0.getSource();
-        System.out.println("It Works");
         if (source.equals(back)) {
             layout.previous(c);
         } else {

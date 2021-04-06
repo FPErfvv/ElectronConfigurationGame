@@ -97,7 +97,6 @@ public class CenterPanel extends JPanel implements ActionListener {
         targetConfigLabel.setText(config[targetIndex]);
         int answerIndex = table.getAnswerIndex();
         if (answerIndex == targetIndex) {
-            System.out.println("Correct!");
             colorIndex = answerIndex;
             table.setButtonColor(colorIndex, Color.GREEN);
             colorIndexCount = 0;
@@ -133,7 +132,6 @@ public class CenterPanel extends JPanel implements ActionListener {
             configIndex = getRandomNumberUsingNextInt(0, config.length-1);
             if (!config[configIndex].equals("null") && !config[configIndex].equals("anomaly")) {
                 looping = false;
-                System.out.println(config[configIndex]);
                 return configIndex;
             }
         }

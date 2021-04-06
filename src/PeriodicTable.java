@@ -210,7 +210,6 @@ public class PeriodicTable extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         JButton source = (JButton) evt.getSource();
         int i = elements.indexOf(source);
-        System.out.println(source.getText() + "(" +i+ "): " + configs[i]);
         answerIndex = i;
     }
 
