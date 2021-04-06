@@ -90,6 +90,7 @@ public class Score extends JPanel {
     String scBasePath;
     String boBasePath;
     String userConfigDir;
+    
 
     public Score(boolean left) {
         this.left = left;
