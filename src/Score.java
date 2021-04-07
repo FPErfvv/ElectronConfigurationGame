@@ -254,7 +254,7 @@ public class Score extends JPanel {
                 myWriter.write("0");
             }
             myWriter.close();
-            System.out.println("File has been written to!");
+            //System.out.println("File has been written to!");
           } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -269,22 +269,22 @@ public class Score extends JPanel {
         // tries to create a new directory
         boolean value = directory.mkdirs();
         if(value) {
-            System.out.println("The new directory is created.");
+            //System.out.println("The new directory is created.");
             filesCreated = true;
         }
         else {
-            System.out.println("The directory already exists.");
+            //System.out.println("The directory already exists.");
             filesCreated = true;
         }
 
         try {
             File myObj = new File(userConfigDir + "/electronConfigGameFiles/highScore.txt");
             if (myObj.createNewFile()) {
-              System.out.println("File created: " + myObj.getName());
+              //System.out.println("File created: " + myObj.getName());
               filesCreated = true;
               writeToFile(true);
             } else {
-              System.out.println("File already exists.");
+              //System.out.println("File already exists.");
               filesCreated = true;
               readFile();
             }

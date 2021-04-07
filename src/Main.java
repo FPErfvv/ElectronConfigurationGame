@@ -48,9 +48,7 @@ public class Main extends JFrame implements ActionListener{
     JButton play;
     Container c;
     public Main() {
-        super("Electron Configuration Game");
-        String userConfigDir = System.getenv("APPDATA");
-        System.out.println(userConfigDir);
+        super("Electron Configuration Game. Made by Fred Probst.");
         c = getContentPane();
         layout = new CardLayout();
         c.setLayout(layout);
