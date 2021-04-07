@@ -1,15 +1,10 @@
-## Getting Started
+## Electron Configuration Game
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Welcome to the my Electron Configuration Game. This was a chemistry project that I did in sophomore year for the quantum mechanics unit. Feel free to fork or clone this repo.
 
-## Folder Structure
+## Explanation
 
-The workspace contains two folders by default, where:
+The finished .exe file is included with the rest of the code. However, if you choose to make any changes, there is a shell script that can be run to rebuild the program. Make sure you have everything necessary to run the jpackage command. I will try to add comments to this in the future to make it more clear and easy to read. Thanks!
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-## Dependency Management
-
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+jpackage manul: https://docs.oracle.com/en/java/javase/14/docs/specs/man/jpackage.html
 # ElectronConfigurationGame
