@@ -48,7 +48,8 @@ public class Main extends JFrame implements ActionListener{
     JButton play;
     Container c;
     public Main() {
-        super("Electron Configuration Game. Made by Fred Probst.");
+        super("Fred Probst's Awesome Electron Configuration Game.");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         c = getContentPane();
         layout = new CardLayout();
         c.setLayout(layout);
