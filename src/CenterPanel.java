@@ -42,6 +42,9 @@ public class CenterPanel extends JPanel implements ActionListener {
         this.leftScore = leftScore;
         this.rightScore = rightScore;
         startStop = new JButton("Start/Stop");
+        // startStop.setOpaque(false);
+        // startStop.setContentAreaFilled(false);
+        // startStop.setBorderPainted(true);
         back = new JButton("Back");
         resetHighScore = new JButton("Reset High Score");
         if (leftScore.filesCreated()) {
